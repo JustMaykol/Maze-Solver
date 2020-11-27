@@ -1,4 +1,3 @@
-# Up, Right, Down, Left
 def get_near(x, y):
     return [get_up(x, y), get_right(x, y), get_down(x, y), get_left(x, y)]
 
