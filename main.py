@@ -12,10 +12,10 @@ path = []
 
 
 def solve_maze(maze):
-    value = position.get_value(maze)
-
     start = finder.find_start(maze)
     end = finder.find_end(maze)
+
+    value = position.get_value(maze)
 
     while True:
         path.clear()
