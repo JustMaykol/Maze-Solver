@@ -2,15 +2,28 @@ from util import finder
 from util import printer
 from util import position
 
-WALL = '#'
-BLANK = ' '
+W = '#'
+B = ' '
 
-START = 'S'
-END = 'E'
+S = 'S'
+E = 'E'
 
-maze = [['#', '#', '#', '#', '#'],
-        ['#', ' ', ' ', ' ', '#'],
-        ['#', ' ', ' ', ' ', '#'],
-        ['#', ' ', ' ', ' ', '#'],
-        ['#', ' ', ' ', ' ', '#'],
-        ['#', '#', '#', '#', '#']]
+path = []
+
+
+def solve_maze(maze):
+    value = position.get_value(maze)
+
+    start = finder.find_start(maze)
+    end = finder.find_end(maze)
+
+    while True:
+        path.clear()
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
