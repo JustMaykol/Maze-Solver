@@ -10,6 +10,13 @@ E = 'E'
 
 path = []
 
+test = [['#', '#', '#', 'E', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', ' ', 'S', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#'],
+        ['#', '#', '#', '#', '#']]
+
 
 def solve_maze(maze):
     start = finder.find_start(maze)
@@ -17,12 +24,19 @@ def solve_maze(maze):
 
     value = position.get_value(maze)
 
+    path.append(start)
+
     while True:
-        path.clear()
+        for key in path:
+            if position.is_valid(key, value):
+                for way in position.get_near(key):
+                    if position.is_valid(way, value):
+                        if finder.is_blank(maze, way):
+                            print(way)
 
 
 def main():
-    pass
+    solve_maze(test)
 
 
 if __name__ == '__main__':

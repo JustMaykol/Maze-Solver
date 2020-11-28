@@ -19,7 +19,7 @@ def get_left(value):
 
 
 def get_value(maze):
-    pass
+    return [get_x(maze), get_y(maze)]
 
 
 def get_x(maze):
@@ -37,11 +37,11 @@ def get_y(maze):
 
     for line in maze:
         x += 1
-        for key in line:
+        for _ in line:
             y += 1
 
     return y // x
 
 
 def is_valid(value, valid):
-    pass
+    return -1 < value[0] < valid[0] and -1 < value[1] < valid[1]
