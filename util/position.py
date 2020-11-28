@@ -23,11 +23,24 @@ def get_value(maze):
 
 
 def get_x(maze):
-    pass
+    x = 0
+
+    for line in maze:
+        x += 1
+
+    return x
 
 
 def get_y(maze):
-    pass
+    x = 0
+    y = 0
+
+    for line in maze:
+        x += 1
+        for key in line:
+            y += 1
+
+    return y // x
 
 
 def is_valid(value, valid):
