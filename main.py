@@ -8,35 +8,34 @@ B = ' '
 S = 'S'
 E = 'E'
 
-path = []
-
-test = [['#', '#', '#', 'E', '#'],
-        ['#', ' ', ' ', ' ', '#'],
-        ['#', ' ', 'S', ' ', '#'],
-        ['#', ' ', ' ', ' ', '#'],
-        ['#', ' ', ' ', ' ', '#'],
-        ['#', '#', '#', '#', '#']]
+test = [['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
+        ['S', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', '#', '#', '#', ' ', '#', '#', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', '#', ' ', ' ', '#'],
+        ['#', ' ', '#', '#', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
+        ['#', ' ', ' ', ' ', '#', ' ', '#', '#', '#', '#'],
+        ['#', ' ', '#', ' ', '#', ' ', ' ', '#', ' ', '#'],
+        ['#', ' ', '#', ' ', ' ', ' ', ' ', ' ', ' ', 'E'],
+        ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#']]
 
 
 def solve_maze(maze):
-    start = finder.find_start(maze)
-    end = finder.find_end(maze)
+    index = finder.find_path(maze)
+    path = finder.find_way(maze, index)
 
-    value = position.get_value(maze)
+    for x, line in enumerate(maze):
+        for y, string in enumerate(line):
+            if isinstance(maze[x][y], int):
+                maze[x][y] = ' '
 
-    path.append(start)
-
-    while True:
-        for key in path:
-            if position.is_valid(key, value):
-                for way in position.get_near(key):
-                    if position.is_valid(way, value):
-                        if finder.is_blank(maze, way):
-                            print(way)
+    return path
 
 
 def main():
-    solve_maze(test)
+    print(solve_maze(test))
+    printer.print_maze(test)
 
 
 if __name__ == '__main__':

@@ -1,3 +1,5 @@
+from util import position
+
 W = '#'
 B = ' '
 
@@ -19,17 +21,69 @@ def find_end(maze):
                 return [a, b]
 
 
-def is_wall(maze, value):
-    return maze[value[0]][value[1]] == W
+def find_path(maze):
+    i = 0
+
+    path = []
+    temp = []
+
+    start = find_start(maze)
+    end = find_end(maze)
+
+    value = position.get_value(maze)
+
+    path.append(start)
+
+    while True:
+        found = any(item for item in position.get_near(end) if item in path)
+
+        if found:
+            break
+
+        i += 1
+
+        for key in path:
+            for way in position.get_near(key):
+                if position.is_valid(way, value):
+                    if position.is_blank(maze, way):
+                        maze[way[0]][way[1]] = i
+                        temp.append(way)
+                    elif position.is_end(maze, way):
+                        temp.append(way)
+
+        path.clear()
+
+        for key in temp:
+            path.append(key)
+
+        temp.clear()
+
+    return i
 
 
-def is_blank(maze, value):
-    return maze[value[0]][value[1]] == B
+def find_way(maze, i):
+    path = []
 
+    start = find_start(maze)
+    end = find_end(maze)
 
-def is_start(maze, value):
-    return maze[value[0]][value[1]] == S
+    value = position.get_value(maze)
 
+    key = end
 
-def is_end(maze, value):
-    return maze[value[0]][value[1]] == E
+    while True:
+        if key == start:
+            break
+
+        for way in position.get_near(key):
+            if position.is_valid(way, value):
+                if isinstance(maze[way[0]][way[1]], int):
+                    if maze[way[0]][way[1]] == i:
+                        maze[way[0]][way[1]] = 'o'
+                        path.append(way)
+                        key = way
+                        i -= 1
+                elif position.is_start(maze, way):
+                    key = way
+
+    return path
