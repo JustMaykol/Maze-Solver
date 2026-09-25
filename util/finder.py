@@ -51,6 +51,10 @@ def find_path(maze):
                     elif position.is_end(maze, way):
                         temp.append(way)
 
+        # Sin celdas nuevas que explorar: la salida no es alcanzable
+        if not temp:
+            return None
+
         path.clear()
 
         for key in temp:

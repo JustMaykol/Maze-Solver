@@ -5,7 +5,7 @@ from util import position
 
 def solve_maze(maze):
     index = finder.find_path(maze)
-    path = finder.find_way(maze, index)
+    path = finder.find_way(maze, index) if index is not None else []
 
     for x, line in enumerate(maze):
         for y, string in enumerate(line):

@@ -62,7 +62,10 @@ util/
 └── printer.py     # print_maze()
 ```
 
-## Limitaciones
+## Casos especiales
 
-- Si el laberinto **no tiene salida alcanzable**, la búsqueda no termina (bucle infinito).
+- Si la salida no es alcanzable, `solve_maze` devuelve una lista vacía.
+
+## Requisitos
+
 - El laberinto debe ser rectangular (todas las filas del mismo largo).
