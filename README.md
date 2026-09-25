@@ -1,19 +1,19 @@
 # Maze Solver
 
-Encuentra el **camino más corto** en un laberinto de cuadrícula usando el algoritmo de Lee (búsqueda en anchura por frentes de onda). Escrito en Python, sin dependencias.
+Finds the **shortest path** in a grid maze using Lee's algorithm (wavefront breadth-first search). Written in Python, with no dependencies.
 
-## Formato del laberinto
+## Maze format
 
-Una lista de listas de caracteres:
+A list of lists of characters:
 
-| Carácter | Significado |
+| Character | Meaning |
 |---|---|
-| `#` | Pared |
-| ` ` | Espacio libre |
-| `S` | Inicio |
-| `E` | Salida |
+| `#` | Wall |
+| ` ` | Open cell |
+| `S` | Start |
+| `E` | Exit |
 
-## Uso
+## Usage
 
 ```python
 from main import solve_maze
@@ -31,10 +31,10 @@ maze = [list(row) for row in [
 
 path = solve_maze(maze)
 print_maze(maze)
-print("pasos:", len(path))
+print("steps:", len(path))
 ```
 
-El camino queda marcado con `o` dentro del mismo laberinto:
+The path is marked with `o` inside the maze itself:
 
 ```
 # # # # # # # # # #
@@ -44,28 +44,28 @@ El camino queda marcado con `o` dentro del mismo laberinto:
 # # o # # # # #   #
 #   o o o o o o E #
 # # # # # # # # # #
-pasos: 10
+steps: 10
 ```
 
-## Cómo funciona
+## How it works
 
-1. **Expansión** (`finder.find_path`): desde `S`, numera cada celda libre con su distancia (1, 2, 3…), avanzando en las 4 direcciones hasta llegar al lado de `E`.
-2. **Retroceso** (`finder.find_way`): desde `E`, sigue las celdas con distancia decreciente hasta volver a `S`, marcándolas con `o`.
+1. **Expansion** (`finder.find_path`): starting from `S`, it numbers each open cell with its distance (1, 2, 3…), moving in 4 directions until it reaches the cell next to `E`.
+2. **Backtracking** (`finder.find_way`): starting from `E`, it follows the cells with decreasing distance back to `S`, marking them with `o`.
 
-## Estructura
+## Structure
 
 ```
 main.py            # solve_maze()
 util/
-├── finder.py      # expansión y retroceso
-├── position.py    # vecinos, límites y tipo de celda
+├── finder.py      # expansion and backtracking
+├── position.py    # neighbors, bounds and cell type
 └── printer.py     # print_maze()
 ```
 
-## Casos especiales
+## Edge cases
 
-- Si la salida no es alcanzable, `solve_maze` devuelve una lista vacía.
+- If the exit is unreachable, `solve_maze` returns an empty list.
 
-## Requisitos
+## Requirements
 
-- El laberinto debe ser rectangular (todas las filas del mismo largo).
+- The maze must be rectangular (every row must have the same length).
